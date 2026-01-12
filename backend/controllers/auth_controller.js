@@ -95,3 +95,24 @@ export const refresh = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const user = async (req, res) => {
+  try {
+    const id = req.user?._id;
+    const user = await User.findById(id)
+      .populate("cartItems.product")
+      .select("-password");
+    if (!user) return res.status(400).json({ message: "User not found" });
+
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      cartItems: user.cartItems,
+    });
+  } catch (error) {
+    console.log("Error in user controller", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};

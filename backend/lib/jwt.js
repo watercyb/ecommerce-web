@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import redis from "./redis.js";
+import { redis } from "./redis.js";
 
 export const generateTokens = (res, userId) => {
   generateAccessToken(res, userId);

@@ -1,5 +1,9 @@
-import { generateAccessToken, generateTokens, refreshCookieOptions } from "../lib/jwt.js";
-import redis from "../lib/redis.js";
+import {
+  generateAccessToken,
+  generateTokens,
+  refreshCookieOptions,
+} from "../lib/jwt.js";
+import { redis } from "../lib/redis.js";
 import User from "../models/user_model.js";
 import jwt from "jsonwebtoken";
 

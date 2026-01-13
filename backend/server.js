@@ -7,6 +7,7 @@ import authRoute from "./routes/auth_route.js";
 import productRoute from "./routes/product_route.js";
 import cartRoutes from "./routes/cart_route.js";
 import couponRoute from "./routes/coupon_route.js";
+import paymentRoutes from "./routes/payment_route.js";
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -18,6 +19,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/cart", cartRoutes);
 app.use("/api/coupons", couponRoute);
+app.use("/api/payments", paymentRoutes);
 
 app.listen(port, async () => {
   console.log("Running on port: " + port);

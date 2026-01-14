@@ -11,7 +11,8 @@ export const login = async (req, res) => {
   if (!req.body) return res.status(400).json("Missing required data");
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate("cartItems.product");
+
     if (!user || !(await user.comparePassword(password)))
       return res.status(400).json({ message: "Invalid email or password" });
 
@@ -22,6 +23,7 @@ export const login = async (req, res) => {
       name: user.name,
       email: user.email,
       role: user.role,
+      cartItems: user.cartItems,
     });
   } catch (error) {
     console.log("Error in login controller", error.message);

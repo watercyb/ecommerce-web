@@ -6,13 +6,17 @@ import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
 import { useUserStore } from "./stores/useUserStore";
 import { useEffect } from "react";
+import LoadingSpinner from "./components/LoadingSpinner";
+import CategoryPage from "./pages/CategoryPage";
 
 const App = () => {
-  const { user, getUser } = useUserStore();
+  const { user, isloading, getUser } = useUserStore();
 
   useEffect(() => {
     getUser();
   }, [getUser]);
+
+  if (isloading) return <LoadingSpinner />;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
@@ -31,6 +35,7 @@ const App = () => {
             element={!user ? <SignUpPage /> : <HomePage />}
           />
           <Route path="/login" element={!user ? <LoginPage /> : <HomePage />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
         </Routes>
       </div>
       <Toaster />

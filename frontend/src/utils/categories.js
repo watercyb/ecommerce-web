@@ -7,3 +7,5 @@ export const categories = [
   { href: "/suits", name: "Suits", imageUrl: "/suits.jpg" },
   { href: "/bags", name: "Bags", imageUrl: "/bags.jpg" },
 ];
+
+export const categoryNames = ["jeans", "t-shirts", "shoes", "glasses", "jackets", "suits", "bags"];

@@ -8,6 +8,7 @@ import { useUserStore } from "./stores/useUserStore";
 import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import CategoryPage from "./pages/CategoryPage";
+import AdminPage from "./pages/AdminPage";
 
 const App = () => {
   const { user, isloading, getUser } = useUserStore();
@@ -36,6 +37,10 @@ const App = () => {
           />
           <Route path="/login" element={!user ? <LoginPage /> : <HomePage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
+          <Route
+            path="/secret-dashboard"
+            element={user?.role === "admin" ? <AdminPage /> : <LoginPage />}
+          />
         </Routes>
       </div>
       <Toaster />

@@ -42,7 +42,7 @@ export const useProductStore = create((set) => ({
   getProductsByCategory: async (category) => {
     try {
       set({ isLoading: true });
-      const res = await axiosInstance.get(`/products/${category}`);
+      const res = await axiosInstance.get(`/products/category/${category}`);
       set({ productsByCategory: res.data });
     } catch (error) {
       toast.error(error.response.data.message || "An error occurred");

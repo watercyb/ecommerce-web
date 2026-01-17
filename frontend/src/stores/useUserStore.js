@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { toast } from "react-hot-toast";
 import axiosInstance from "../utils/axios";
+import { useCartStore } from "./useCartStore";
 
 export const useUserStore = create((set) => ({
   user: null,
@@ -31,6 +32,7 @@ export const useUserStore = create((set) => ({
       set({ isLoading: true });
       const res = await axiosInstance.get("/auth/user");
       set({ user: res.data });
+      useCartStore.getState().setCart(res.data.cartItems);
     } catch (error) {
       toast.error(error.response.data.message || "An error occurred");
     } finally {
@@ -47,6 +49,7 @@ export const useUserStore = create((set) => ({
         password,
       });
       set({ user: res.data });
+      useCartStore.getState().setCart(res.data.cartItems);
     } catch (error) {
       toast.error(error.response.data.message || "An error occurred");
     } finally {

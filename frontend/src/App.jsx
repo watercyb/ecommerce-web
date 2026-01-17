@@ -11,13 +11,13 @@ import CategoryPage from "./pages/CategoryPage";
 import AdminPage from "./pages/AdminPage";
 
 const App = () => {
-  const { user, isloading, getUser } = useUserStore();
+  const { user, isLoading, getUser } = useUserStore();
 
   useEffect(() => {
     getUser();
   }, [getUser]);
 
-  if (isloading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">

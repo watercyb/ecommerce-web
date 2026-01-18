@@ -9,6 +9,9 @@ import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import CategoryPage from "./pages/CategoryPage";
 import AdminPage from "./pages/AdminPage";
+import CartPage from "./pages/CartPage";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
 
 const App = () => {
   const { user, isLoading, getUser } = useUserStore();
@@ -41,6 +44,9 @@ const App = () => {
             path="/secret-dashboard"
             element={user?.role === "admin" ? <AdminPage /> : <LoginPage />}
           />
+          <Route path="/cart" element={user ? <CartPage /> : <LoginPage />} />
+          <Route path="/payments/purchase-success" element={<PaymentSuccess />} />
+          <Route path="/payments/purchase-cancel" element={<PaymentCancel />} />
         </Routes>
       </div>
       <Toaster />

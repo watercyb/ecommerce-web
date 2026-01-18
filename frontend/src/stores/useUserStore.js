@@ -34,7 +34,7 @@ export const useUserStore = create((set) => ({
       set({ user: res.data });
       useCartStore.getState().setCart(res.data.cartItems);
     } catch (error) {
-      toast.error(error.response.data.message || "An error occurred");
+      console.log(error.response.data.message || "An error occurred");
     } finally {
       set({ isLoading: false });
     }

@@ -13,6 +13,7 @@ export const useProductStore = create((set) => ({
     totalRevenue: 0,
   },
   dailySalesData: [],
+  recommendations: [],
   isLoading: false,
 
   getProducts: async () => {
@@ -116,6 +117,18 @@ export const useProductStore = create((set) => ({
 
       set({ analyticsData: res.data.analyticsData });
       set({ dailySalesData: res.data.dailySalesData });
+    } catch (error) {
+      toast.error(error.response.data.message || "An error occurred");
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
+  getRecommendations: async () => {
+    try {
+      set({ isLoading: true });
+      const res = await axiosInstance.get("/products/recommendations");
+      set({ recommendations: res.data });
     } catch (error) {
       toast.error(error.response.data.message || "An error occurred");
     } finally {

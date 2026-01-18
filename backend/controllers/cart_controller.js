@@ -24,11 +24,16 @@ export const addToCart = async (req, res) => {
     const { productId } = req.body;
     const user = req.user;
 
-    const existingItem = user.cartItems.find((item) => item.id === productId);
+    const existingItem = user.cartItems.find(
+      (item) => item.product === productId
+    );
     if (existingItem) {
       existingItem.quantity += 1;
     } else {
-      user.cartItems.push(productId);
+      user.cartItems.push({
+        quantity: 1,
+        product: productId,
+      });
     }
 
     await user.save();
@@ -46,7 +51,9 @@ export const removeAllFromCart = async (req, res) => {
     if (!productId) {
       user.cartItems = [];
     } else {
-      user.cartItems = user.cartItems.filter((item) => item.id !== productId);
+      user.cartItems = user.cartItems.filter(
+        (item) => item.product._id.toString() !== productId
+      );
     }
     await user.save();
     res.json(user.cartItems);
@@ -58,13 +65,18 @@ export const removeAllFromCart = async (req, res) => {
 export const updateQuantity = async (req, res) => {
   try {
     const { id: productId } = req.params;
-    const { quantity } = req.body;
+    const { delta } = req.body;
     const user = req.user;
-    const existingItem = user.cartItems.find((item) => item.id === productId);
+    const existingItem = user.cartItems.find(
+      (item) => item.product.toString() === productId
+    );
 
     if (existingItem) {
+      const quantity = existingItem.quantity + delta;
       if (quantity === 0) {
-        user.cartItems = user.cartItems.filter((item) => item.id !== productId);
+        user.cartItems = user.cartItems.filter(
+          (item) => item.product.toString() !== productId
+        );
         await user.save();
         return res.json(user.cartItems);
       }

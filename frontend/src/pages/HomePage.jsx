@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useProductStore } from "../stores/useProductStore";
 import { categories } from "../utils/categories";
 import CategoryItem from "../components/CategoryItem";
+import FeaturedProducts from "../components/FeaturedProducts";
 
 const HomePage = () => {
   const { featuredProducts, isLoading, getFeaturedProducts } = useProductStore();

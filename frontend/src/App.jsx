@@ -10,8 +10,8 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import CategoryPage from "./pages/CategoryPage";
 import AdminPage from "./pages/AdminPage";
 import CartPage from "./pages/CartPage";
-import PaymentSuccess from "./pages/PaymentSuccess";
-import PaymentCancel from "./pages/PaymentCancel";
+import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
+import PurchaseCancelPage from "./pages/PurchaseCancelPage";
 
 const App = () => {
   const { user, isLoading, getUser } = useUserStore();
@@ -45,8 +45,8 @@ const App = () => {
             element={user?.role === "admin" ? <AdminPage /> : <LoginPage />}
           />
           <Route path="/cart" element={user ? <CartPage /> : <LoginPage />} />
-          <Route path="/payments/purchase-success" element={<PaymentSuccess />} />
-          <Route path="/payments/purchase-cancel" element={<PaymentCancel />} />
+          <Route path="/payments/purchase-success" element={<PurchaseSuccessPage />} />
+          <Route path="/payments/purchase-cancel" element={<PurchaseCancelPage />} />
         </Routes>
       </div>
       <Toaster />

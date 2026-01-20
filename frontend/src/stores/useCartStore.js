@@ -8,6 +8,7 @@ export const useCartStore = create((set, get) => ({
   total: 0,
   subtotal: 0,
   isCouponApplied: false,
+  purchased: false,
   isLoading: false,
 
   addToCart: async (product) => {
@@ -100,13 +101,16 @@ export const useCartStore = create((set, get) => ({
 
   checkPayment: async (sessionId) => {
     try {
-      set({ isLoading: true });
+      set({ isLoading: true, purchased: false });
       const res = await axiosInstance.post("/payments/checkout-success", {
         sessionId,
       });
-      console.log(res.data);
+      if (res.data.success) {
+        await axiosInstance.delete("/cart/");
+        delete set({ cart: [], purchased: true });
+      }
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred");
+      console.log(error.response?.data?.message || "An error occurred");
     } finally {
       set({ isLoading: false });
     }

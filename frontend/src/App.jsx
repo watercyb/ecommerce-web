@@ -20,6 +20,8 @@ const App = () => {
     getUser();
   }, [getUser]);
 
+  console.log(import.meta.env.VITE_URL);
+
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -45,8 +47,14 @@ const App = () => {
             element={user?.role === "admin" ? <AdminPage /> : <LoginPage />}
           />
           <Route path="/cart" element={user ? <CartPage /> : <LoginPage />} />
-          <Route path="/payments/purchase-success" element={<PurchaseSuccessPage />} />
-          <Route path="/payments/purchase-cancel" element={<PurchaseCancelPage />} />
+          <Route
+            path="/payments/purchase-success"
+            element={<PurchaseSuccessPage />}
+          />
+          <Route
+            path="/payments/purchase-cancel"
+            element={<PurchaseCancelPage />}
+          />
         </Routes>
       </div>
       <Toaster />

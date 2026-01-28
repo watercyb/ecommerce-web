@@ -2,7 +2,7 @@ import axios from "axios";
 import { useUserStore } from "../stores/useUserStore";
 
 const axiosInstance = axios.create({
-  baseURL: (import.meta.env.VITE_URL || "") + "/api",
+  baseURL: "/api",
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });

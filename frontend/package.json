@@ -13,7 +13,6 @@
     "@stripe/stripe-js": "^8.6.1",
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.2",
-    "confetti": "^3.0.1",
     "framer-motion": "^12.26.2",
     "lucide-react": "^0.562.0",
     "react": "^19.1.1",
